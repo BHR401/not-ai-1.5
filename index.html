@@ -343,9 +343,14 @@
             >
           </div>
 
-          <div class="text-xs text-slate-700 space-y-1 font-medium pt-0.5">
-            <p>gợi ý gõ chữ AQ rồi thêm dấu. sau đó gõ chuỗi sau:</p>
-            <p class="font-mono text-[11px] bg-slate-100 p-1.5 rounded border border-slate-300 select-all break-all text-blue-900 font-bold">Ab8RN6KIlQhfxcYMyUvcaJDJ7D2gsqprDBOqjj5HX2u1-5Zrjw</p>
+          <div class="text-xs text-slate-700 space-y-1.5 font-medium pt-0.5">
+            <p class="flex items-center space-x-1">
+              <i class="fa-solid fa-circle-info text-blue-600"></i>
+              <span>Lấy mã API Key miễn phí tại:</span>
+            </p>
+            <a href="https://aistudio.google.com/api-keys" target="_blank" class="inline-block font-mono text-[11px] bg-blue-50 hover:bg-blue-100 text-blue-700 p-2 rounded-xl border border-blue-200 underline select-all break-all font-bold transition-colors">
+              https://aistudio.google.com/api-keys <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -369,15 +374,20 @@
     let isRecording = false;
 
     // Quản lý API Key động
-    const DEFAULT_KEY_PREFIX = "AQ.";
-    const DEFAULT_KEY_SUFFIX = "Ab8RN6KIlQhfxcYMyUvcaJDJ7D2gsqprDBOqjj5HX2u1-5Zrjw";
     let storedCustomKey = localStorage.getItem('not_ai_gemini_key') || '';
     
     function getActiveGeminiKey() {
-      return storedCustomKey ? storedCustomKey.trim() : (DEFAULT_KEY_PREFIX + DEFAULT_KEY_SUFFIX);
+      return storedCustomKey ? storedCustomKey.trim() : '';
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      // Xóa key cũ mặc định nếu có trong localStorage để ô nhập trống hoàn toàn
+      const oldDefaultKey = "AQ.Ab8RN6KLFmshjYRuXHZ4H1DUn-MzBSRKdIRnfx6TrYXC";
+      if (localStorage.getItem('not_ai_gemini_key') === oldDefaultKey || localStorage.getItem('not_ai_gemini_key') === "...") {
+        localStorage.removeItem('not_ai_gemini_key');
+        storedCustomKey = '';
+      }
+
       updateUserUI();
       setupSpeechRecognition();
       setupDragAndDrop();
@@ -426,7 +436,7 @@
     function openSettings() {
       document.getElementById('nameInputModal').value = userName;
       const keyInput = document.getElementById('apiKeyInput');
-      if (keyInput) keyInput.value = storedCustomKey || (DEFAULT_KEY_PREFIX + DEFAULT_KEY_SUFFIX);
+      if (keyInput) keyInput.value = storedCustomKey;
       document.getElementById('settingsModal').classList.remove('hidden');
       document.getElementById('settingsModal').classList.add('flex');
     }
