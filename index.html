@@ -13,6 +13,7 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    
     .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
@@ -355,7 +356,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       setTheme(currentTheme, false);
 
-      const oldDefaultKey = "AQ.Ab8RN6KLFmshjYRuXHZ4H1DUn-MzBSRKdIRnfx6TrYXC";
+      const oldDefaultKey = "...";
       if (localStorage.getItem('not_ai_gemini_key') === oldDefaultKey || localStorage.getItem('not_ai_gemini_key') === "...") {
         localStorage.removeItem('not_ai_gemini_key');
         storedCustomKey = '';
